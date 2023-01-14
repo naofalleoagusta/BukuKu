@@ -4,13 +4,14 @@ const HomePage = lazy(() => import("@/components/pages/home"));
 
 type RouterType = {
   element: ExoticComponent<unknown>;
-  path: string;
+  path?: string;
+  index?: boolean;
 };
 
 const routers: RouterType[] = [
   {
     element: HomePage,
-    path: "/",
+    index: true,
   },
 ];
 
