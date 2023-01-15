@@ -13,3 +13,8 @@ export type SectionType = {
   title: string;
   content: string;
 };
+
+export type CategoryType = {
+  id: number;
+  name: string;
+};

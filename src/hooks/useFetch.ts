@@ -4,7 +4,6 @@ import fetcher, { FetcherType } from "@/helpers/fetcher";
 
 type DataResponse<T> = {
   data: T | undefined;
-  loading: boolean;
   error: unknown;
 };
 
@@ -13,7 +12,6 @@ const useFetch = <T>({ url, searchParams }: FetcherType): DataResponse<T> => {
 
   return {
     data,
-    loading: !data && !error,
     error,
   };
 };

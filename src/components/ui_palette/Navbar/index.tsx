@@ -9,7 +9,7 @@ export const logo = cx([
 
 const Navbar = () => {
   return (
-    <header className={cx(["fixed top-0 left-0", "w-full h-[70px]", "py-4"])}>
+    <header className={cx(["fixed top-0 left-0 z-[10]", "w-full h-[70px]", "py-4"])}>
       <nav
         className={cx([
           "max-w-screen-lg",
@@ -19,11 +19,10 @@ const Navbar = () => {
           "flex-row",
           "justify-between",
           "items-center",
-          "px-4",
-          "lg:px-0",
+          "px-4 lg:px-0",
         ])}
       >
-        <Link to="/" className={cx([logo, "text-[24px]"])}>
+        <Link to="/" className={cx([logo, "text-xl"])}>
           BukuKu
         </Link>
       </nav>

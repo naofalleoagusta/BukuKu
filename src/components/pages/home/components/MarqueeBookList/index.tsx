@@ -1,13 +1,15 @@
-import useFetchBooks from "@/hooks/useFechBooks";
 import { cx } from "class-variance-authority";
+
+import useFetchBooks from "@/hooks/useFechBooks";
+
 import MarqueeBookCard from "../MarqueeBookCard";
 
 const MarqueeBookList = () => {
-  const { data: books, error, loading } = useFetchBooks({ categoryId: 1 });
+  const { data: books, error } = useFetchBooks({ categoryId: 1 });
   if (error) {
     return <div>Something is wrong</div>;
   }
-  if (loading) {
+  if (!books) {
     return <div>loading</div>;
   }
   return (
@@ -17,7 +19,7 @@ const MarqueeBookList = () => {
         "flex",
         "overflow-x-hidden",
         "group",
-        "translate-y-[-85px] md:translate-y-[-70px]"
+        "translate-y-[-60px] md:translate-y-[-70px]"
       )}
     >
       {[...Array(2)].map((_, idx) => (
