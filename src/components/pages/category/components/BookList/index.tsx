@@ -9,6 +9,9 @@ import Section from "@/components/ui_palette/Section";
 import useFetchBooks from "@/hooks/useFechBooks";
 
 import { PageInfoType } from "../../types";
+import { memo, useEffect, useMemo, useState } from "react";
+import { BookType } from "@/types";
+import addFetchedBooks from "../../helpers/addFetchedBooks";
 
 type BookListProps = {
   pageInfo: PageInfoType;
@@ -17,11 +20,28 @@ type BookListProps = {
 
 const BookList = ({ pageInfo, handleChangePage }: BookListProps) => {
   const { id } = useParams<{ id: string }>();
+  const [fetchedBooks, setFetchedBooks] = useState<BookType[]>([]);
+
   const { data: books, error } = useFetchBooks({
     categoryId: parseInt(id || "0"),
     page: pageInfo.page,
     size: pageInfo.size,
   });
+
+  const filteredBooks = useMemo(() => {
+    const query = pageInfo.query.toLowerCase();
+    return fetchedBooks.filter(
+      (book) =>
+        book.title.toLocaleLowerCase().includes(query) ||
+        book.authors.some((author) => author.toLowerCase().includes(query))
+    );
+  }, [fetchedBooks, pageInfo.query]);
+
+  useEffect(() => {
+    if (books?.length) {
+      setFetchedBooks((prev) => addFetchedBooks({ prevBooks: prev, newBooks: books }));
+    }
+  }, [books]);
 
   if (error) {
     return <div>Something is wrong</div>;
@@ -41,29 +61,40 @@ const BookList = ({ pageInfo, handleChangePage }: BookListProps) => {
           "translate-y-[-50px]"
         )}
       >
-        {books.map((book) => (
-          <BookCard key={`book-${book.id}`} book={book} />
-        ))}
+        {pageInfo.query ? (
+          !!filteredBooks.length ? (
+            filteredBooks.map((book) => <BookCard key={`book-${book.id}`} book={book} />)
+          ) : (
+            <h2 className={cx("col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-5", "pt-[70px]")}>
+              {" "}
+              Sorry, no record exist containing &quot;{pageInfo.query}&quot;
+            </h2>
+          )
+        ) : (
+          books.map((book) => <BookCard key={`book-${book.id}`} book={book} />)
+        )}
       </div>
-      <div className={cx("flex gap-4", "items-center", "justify-end", "mb-4")}>
-        <Button
-          size="small"
-          intent={pageInfo.page ? "primary" : "disabled"}
-          onClick={() => handleChangePage(pageInfo.page - 1)}
-        >
-          <ChevronLeft size="large" />
-        </Button>
-        <span>{pageInfo.page + 1}</span>
-        <Button
-          size="small"
-          intent={books.length === pageInfo.size ? "primary" : "disabled"}
-          onClick={() => handleChangePage(pageInfo.page + 1)}
-        >
-          <ChevronRight size="large" />
-        </Button>
-      </div>
+      {!pageInfo.query && (
+        <div className={cx("flex gap-4", "items-center", "justify-end", "mb-4")}>
+          <Button
+            size="small"
+            intent={pageInfo.page ? "primary" : "disabled"}
+            onClick={() => handleChangePage(pageInfo.page - 1)}
+          >
+            <ChevronLeft size="large" />
+          </Button>
+          <span className="font-semibold">{pageInfo.page + 1}</span>
+          <Button
+            size="small"
+            intent={books.length === pageInfo.size ? "primary" : "disabled"}
+            onClick={() => handleChangePage(pageInfo.page + 1)}
+          >
+            <ChevronRight size="large" />
+          </Button>
+        </div>
+      )}
     </Section>
   );
 };
 
-export default BookList;
+export default memo(BookList);

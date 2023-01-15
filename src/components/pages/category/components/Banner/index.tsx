@@ -1,12 +1,4 @@
-import {
-  ChangeEvent,
-  ChangeEventHandler,
-  memo,
-  ReactEventHandler,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { ChangeEvent, memo, useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { cx } from "class-variance-authority";
 
@@ -35,18 +27,6 @@ const Banner = ({ query, handleChangeQuery }: BannerProps) => {
 
   const { data: categories, error } = useFetchCategories();
 
-  const handleToggleInput = () => {
-    if (!showInput && inputEl.current) {
-      inputEl.current.focus();
-    }
-    handleChangeQuery("");
-    setShowInput((prev) => !prev);
-    setIsTransition(true);
-    setTimeout(() => {
-      setIsTransition(false);
-    }, 500);
-  };
-
   const category = useMemo(
     () => categories?.find((category) => category.id === parseInt(id || "0")),
     [categories, id]
@@ -55,6 +35,26 @@ const Banner = ({ query, handleChangeQuery }: BannerProps) => {
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     handleChangeQuery(e.target.value);
   };
+
+  const handleToggleInput = () => {
+    if (!showInput && inputEl.current) {
+      inputEl.current.focus();
+    }
+    if (query) {
+      handleChangeQuery("");
+    }
+    setShowInput((prev) => !prev);
+    setIsTransition(true);
+    setTimeout(() => {
+      setIsTransition(false);
+    }, 500);
+  };
+
+  useEffect(() => {
+    if (query && !showInput) {
+      setShowInput(true);
+    }
+  }, []);
 
   if (error) {
     return <div>Something is wrong</div>;
