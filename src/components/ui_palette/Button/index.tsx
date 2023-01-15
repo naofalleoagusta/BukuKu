@@ -4,9 +4,10 @@ import { ButtonHTMLAttributes } from "react";
 const buttonStyle = cva("rounded-md transition-all duration-500 font-semibold", {
   variants: {
     intent: {
-      primary: ["bg-gray-700 hover:bg-slate-800", "text-white whitespace-nowrap"],
+      primary: ["bg-gray-900 hover:bg-slate-700", "text-white whitespace-nowrap"],
       secondary: ["bg-transparent", "text-gray-800", "hover:bg-slate-200"],
       danger: ["bg-red-600 hover:bg-red-700", "text-white"],
+      disabled: ["bg-gray-200", "cursor-not-allowed", "text-gray-400"],
     },
     size: {
       small: ["text-xs sm:text-sm", "py-2", "px-2"],
@@ -41,6 +42,7 @@ const Button = ({
         size,
         className: `${className} ${fullWidth ? "w-full" : ""}`,
       })}
+      disabled={intent === "disabled"}
       {...props}
     >
       {children}

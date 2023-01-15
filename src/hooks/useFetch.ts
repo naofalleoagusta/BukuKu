@@ -8,7 +8,9 @@ type DataResponse<T> = {
 };
 
 const useFetch = <T>({ url, searchParams }: FetcherType): DataResponse<T> => {
-  const { data, error } = useSWR<T>({ url, searchParams }, fetcher);
+  const { data, error } = useSWR<T>({ url, searchParams }, fetcher, {
+    shouldRetryOnError: false,
+  });
 
   return {
     data,

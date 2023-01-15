@@ -5,10 +5,7 @@ import { LazyLoadComponent } from "react-lazy-load-image-component";
 import Section from "@/components/ui_palette/Section";
 import BookList from "../BookList";
 
-import useFetch from "@/hooks/useFetch";
-
-import { CATEGORIES_API_URL } from "@/config";
-import { CategoryType } from "@/types";
+import useFetchCategories from "@/hooks/useFetchCategories";
 
 const categoryCardClasses = [
   "from-cyan-500 to-blue-500",
@@ -17,7 +14,7 @@ const categoryCardClasses = [
 ];
 
 const CategoriesList = () => {
-  const { data: categories, error } = useFetch<CategoryType[]>({ url: CATEGORIES_API_URL });
+  const { data: categories, error } = useFetchCategories();
   if (error) {
     return <div>Something is wrong</div>;
   }
@@ -35,12 +32,13 @@ const CategoriesList = () => {
         <LazyLoadComponent>
           <Section>
             <h2>Browse Other Category</h2>
-            <div className={cx("grid grid-cols-2 md:grid-cols-3 gap-4", "mt-6 md:mt-8 mb-4")}>
+            <div
+              className={cx("grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4", "mt-6 md:mt-8 mb-4")}
+            >
               {categories.slice(2).map((category, idx) => (
                 <Link
                   to={`/category/${category.id}`}
                   key={category.id}
-                  state={{ category }}
                   className={cx(
                     "p-4",
                     "rounded-md",

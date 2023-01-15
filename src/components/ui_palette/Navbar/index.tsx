@@ -19,7 +19,7 @@ const Navbar = () => {
           "flex-row",
           "justify-between",
           "items-center",
-          "px-4 lg:px-0",
+          "px-4 lg:px-2",
         ])}
       >
         <Link to="/" className={cx([logo, "text-xl"])}>

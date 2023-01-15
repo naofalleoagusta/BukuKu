@@ -27,11 +27,7 @@ const BookList = ({ title, categoryId }: BookListProps) => {
         <div className={cx("flex", "z-[2] relative", "items-center")}>
           <h2 className={cx("grow", "line-clamp-2 md:line-clamp-none", "break-all")}>{title}</h2>
           {hasMoreBooks && (
-            <Link
-              to={`/category/${categoryId}`}
-              state={{ category: { id: categoryId, name: title } }}
-              className="shrink-0"
-            >
+            <Link to={`/category/${categoryId}`} className="shrink-0">
               <Button intent="secondary">View All</Button>
             </Link>
           )}

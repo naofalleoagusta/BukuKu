@@ -19,7 +19,7 @@ const BookCard = ({ className, book }: BookCardProps) => {
       <p className={cx("font-semibold", "text-base", "line-clamp-1 md:line-clamp-2")}>
         {book.title}
       </p>
-      <p className={cx("text-sm", "line-clamp-1")}>by {book.authors?.[0] || "Unknown"}</p>
+      <p className={cx("text-sm", "line-clamp-1")}>by {book.authors.join(", ")}</p>
     </div>
   );
 };

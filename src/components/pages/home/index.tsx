@@ -9,7 +9,7 @@ import CategoriesList from "./components/CategoriesList";
 const Home = () => {
   return (
     <>
-      <Section className={cx("bg-gray-900", "py-[120px]")}>
+      <Section isBanner>
         <h1 className={cx("text-center", "text-zinc-200", "text-3xl sm:text-4xl md:text-5xl")}>
           Find Your Favorite Books <br /> Only on <span className={logo}>BukuKu</span>
         </h1>
