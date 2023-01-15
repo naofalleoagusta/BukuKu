@@ -22,10 +22,10 @@ const BookList = ({ title, categoryId }: BookListProps) => {
     return <div>loading</div>;
   }
   return (
-    <Section className="overflow-hidden">
+    <Section className="overflow-hidden" wrapperClassName={cx("pr-0")}>
       <div className={cx("py-[30px]", "relative")}>
         <div className={cx("flex", "z-[2] relative", "items-center")}>
-          <h2 className={cx("grow", "line-clamp-2 md:line-clamp-none")}>{title}</h2>
+          <h2 className={cx("grow", "line-clamp-2 md:line-clamp-none", "break-all")}>{title}</h2>
           {hasMoreBooks && (
             <Link
               to={`/category/${categoryId}`}
@@ -40,7 +40,7 @@ const BookList = ({ title, categoryId }: BookListProps) => {
           className={cx(
             "absolute z-[1]",
             "text-6xl md:text-8xl font-bold text-gray-200",
-            "top-[50px] md:top-[40px] left-[40px]",
+            "top-[40px] left-[40px]",
             "whitespace-nowrap",
             "opacity-4"
           )}
@@ -49,14 +49,20 @@ const BookList = ({ title, categoryId }: BookListProps) => {
         </span>
         <div
           className={cx(
-            "grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5",
+            "flex lg:grid lg:grid-cols-5",
+            "overflow-x-auto lg:overflow-x-hidden",
             "z-[1] relative",
-            "mt-10",
-            "gap-4"
+            "mt-6 md:mt-10",
+            "gap-4",
+            "pb-4"
           )}
         >
           {(hasMoreBooks ? books.slice(0, books.length - 1) : books).map((book) => (
-            <BookCard book={book} key={`book-${book.id}`} />
+            <BookCard
+              book={book}
+              key={`book-${book.id}`}
+              className={cx("basis-[150px] md:basis-[250px] shrink-0")}
+            />
           ))}
         </div>
       </div>
