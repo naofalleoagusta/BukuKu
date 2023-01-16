@@ -6,6 +6,30 @@
   font-family: "Inter", -apple-system, Helvetica, Arial, sans-serif;
 }
 
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #475569 #9ca3af;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #9ca3af;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #475569;
+  border-radius: 10px;
+  border: 0px solid #ffffff;
+}
+
 @layer base {
   h1,
   h2,

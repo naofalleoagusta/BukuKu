@@ -5,12 +5,14 @@ import { cx } from "class-variance-authority";
 import Layout from "../Layout";
 import Section from "../Section";
 import Skeleton from "../Skeleton";
+import ScrollToTop from "../ScrollToTop";
 
 import routers from "@/router";
 
 const RouterProvider = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           {routers.map((dtRoute, idx) => {

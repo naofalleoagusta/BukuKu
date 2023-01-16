@@ -1,6 +1,5 @@
 import { cx } from "class-variance-authority";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-
 import {
   XMarkIcon as Close,
   MagnifyingGlassIcon as MagnifyingGlass,
@@ -9,6 +8,7 @@ import {
 import Button from "../Button";
 import Section from "../Section";
 import Skeleton from "../Skeleton";
+import Breadcrumb, { BreadcrumbProps } from "../Breadcrumb";
 
 const iconStyle = cx(
   "text-white group-hover:text-gray-700",
@@ -23,9 +23,16 @@ type SearchBannerProps = {
   handleChangeQuery: (param: string) => void;
   loading?: boolean;
   error?: unknown;
-};
+} & BreadcrumbProps;
 
-const SearchBanner = ({ title, query, handleChangeQuery, loading, error }: SearchBannerProps) => {
+const SearchBanner = ({
+  title,
+  query,
+  handleChangeQuery,
+  loading,
+  error,
+  breadcrumbs,
+}: SearchBannerProps) => {
   const inputEl = useRef<HTMLInputElement>(null);
   const [showInput, setShowInput] = useState(false);
   const [isTransition, setIsTransition] = useState(false);
@@ -72,6 +79,7 @@ const SearchBanner = ({ title, query, handleChangeQuery, loading, error }: Searc
 
   return (
     <Section isBanner>
+      <Breadcrumb breadcrumbs={breadcrumbs} />
       <div className="flex items-center gap-2">
         <div className="grow flex items-center">
           <h1

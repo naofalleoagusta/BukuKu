@@ -10,12 +10,14 @@ const DialogBook = () => {
       handleClose={toggleDialogBook}
       body={
         !!dialogBook && (
-          <div className={cx("grid md:grid-cols-2", "gap-6", "overflow-auto")}>
+          <div className={cx("grid md:grid-cols-2", "gap-6", "overflow-auto", "h-full")}>
             <div>
               <Image
                 src={dialogBook.cover_url}
                 placeholderSrc={dialogBook.cover_url}
                 effect="black-and-white"
+                className="w-full"
+                wrapperClassName="w-full"
               />
             </div>
             <div className="flex flex-col gap-1 h-full">

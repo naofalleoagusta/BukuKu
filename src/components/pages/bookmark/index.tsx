@@ -12,7 +12,21 @@ const BookmarkPage = () => {
   const handleChangeQuery = (param: string) => setQuery(param);
   return (
     <>
-      <SearchBanner handleChangeQuery={handleChangeQuery} query={query} title="Bookmark" />
+      <SearchBanner
+        handleChangeQuery={handleChangeQuery}
+        query={query}
+        title="Bookmark"
+        breadcrumbs={[
+          {
+            text: "Home",
+            path: "/",
+          },
+          {
+            text: "Bookmark",
+            path: "",
+          },
+        ]}
+      />
       <BookmarkList query={query.toLowerCase()} />
     </>
   );

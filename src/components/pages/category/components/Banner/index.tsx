@@ -29,6 +29,16 @@ const Banner = ({ query, handleChangeQuery }: BannerProps) => {
       handleChangeQuery={handleChangeQuery}
       loading={!categories}
       error={error}
+      breadcrumbs={[
+        {
+          text: "Home",
+          path: `/`,
+        },
+        {
+          text: category?.name || "Category",
+          path: "",
+        },
+      ]}
     />
   );
 };
