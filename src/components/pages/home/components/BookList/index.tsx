@@ -49,7 +49,6 @@ const BookList = ({ title, categoryId }: BookListProps) => {
             "overflow-x-auto lg:overflow-x-hidden",
             "z-[1] relative",
             "mt-6 md:mt-10",
-            "gap-4",
             "pb-4"
           )}
         >

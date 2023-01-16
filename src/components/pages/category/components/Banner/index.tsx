@@ -1,17 +1,21 @@
 import { ChangeEvent, memo, useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { cx } from "class-variance-authority";
+import {
+  XMarkIcon as Close,
+  MagnifyingGlassIcon as MagnifyingGlass,
+} from "@heroicons/react/24/outline";
 
 import Section from "@/components/ui_palette/Section";
 import Button from "@/components/ui_palette/Button";
-import { Close, MagnifyingGlass } from "@/components/icons";
 
 import useFetchCategories from "@/hooks/useFetchCategories";
 
 const iconStyle = cx(
   "text-white group-hover:text-gray-700",
   "absolute top-2 left-2",
-  "transition-all duration-500 ease-in-out"
+  "transition-all duration-500 ease-in-out",
+  "w-8 h-8"
 );
 
 type BannerProps = {
@@ -100,11 +104,8 @@ const Banner = ({ query, handleChangeQuery }: BannerProps) => {
           className="group relative w-[48px] h-[48px] shrink-0"
           onClick={handleToggleInput}
         >
-          <Close size="large" className={cx(iconStyle, showInput ? "opacity-100" : "opacity-0")} />
-          <MagnifyingGlass
-            size="large"
-            className={cx(iconStyle, showInput ? "opacity-0" : "opacity-100")}
-          />
+          <Close className={cx(iconStyle, showInput ? "opacity-100" : "opacity-0")} />
+          <MagnifyingGlass className={cx(iconStyle, showInput ? "opacity-0" : "opacity-100")} />
         </Button>
       </div>
     </Section>

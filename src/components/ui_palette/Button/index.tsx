@@ -1,7 +1,7 @@
 import { cva, VariantProps } from "class-variance-authority";
 import { ButtonHTMLAttributes } from "react";
 
-const buttonStyle = cva("rounded-md transition-all duration-500 font-semibold", {
+const buttonStyle = cva("rounded-md transition-all duration-500 font-semibold outline-none", {
   variants: {
     intent: {
       primary: ["bg-gray-900 hover:bg-slate-700", "text-white whitespace-nowrap"],

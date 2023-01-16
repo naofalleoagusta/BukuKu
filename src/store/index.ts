@@ -1,14 +1,20 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import createBookmarkedBookSlice, { BookmarkedBookSliceType } from "./slices/bookmarkedBook";
+import createBookmarkedBookSlice, {
+  BookmarkedBookSliceType,
+  KEY_BOOKMARK,
+} from "./slices/bookmarkedBook";
 
 const useStore = create<BookmarkedBookSliceType>()(
   persist(
     (...state) => ({
       ...createBookmarkedBookSlice(...state),
     }),
-    { name: "book-store" }
+    {
+      name: KEY_BOOKMARK,
+      partialize: (state) => state.books,
+    }
   )
 );
 
