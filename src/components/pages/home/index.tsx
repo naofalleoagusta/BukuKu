@@ -5,9 +5,13 @@ import MarqueeBookList from "./components/MarqueeBookList";
 import CategoriesList from "./components/CategoriesList";
 import BookmarkList from "./components/BookmarkList";
 
+import useTitle from "@/hooks/useTitle";
+
 import { logo } from "@/components/ui_palette/Navbar";
 
 const Home = () => {
+  useTitle("Home");
+
   return (
     <>
       <Section isBanner>

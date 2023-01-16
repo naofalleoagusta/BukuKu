@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import SearchBanner from "@/components/ui_palette/SearchBanner";
 
 import useFetchCategories from "@/hooks/useFetchCategories";
+import useTitle from "@/hooks/useTitle";
 
 type BannerProps = {
   query: string;
@@ -18,6 +19,9 @@ const Banner = ({ query, handleChangeQuery }: BannerProps) => {
     () => categories?.find((category) => category.id === parseInt(id || "0")),
     [categories, id]
   );
+
+  useTitle(`${category?.name || "Category"}`);
+
   if (error) {
     return <div>Something is wrong</div>;
   }

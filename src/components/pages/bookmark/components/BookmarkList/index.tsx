@@ -6,9 +6,9 @@ import BookCard from "@/components/ui_palette/BookCard";
 import Section from "@/components/ui_palette/Section";
 
 import useBookStore from "@/hooks/useBookStore";
-import filterBooks from "../../category/helpers/filterBooks";
+import filterBooks from "../../../category/helpers/filterBooks";
 
-import { EMPTY_BOOKMARK_PLACEHOLDER } from "../constant";
+import { EMPTY_BOOKMARK_PLACEHOLDER } from "../../constant";
 
 type BookmarkListProps = {
   query: string;
