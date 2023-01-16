@@ -8,6 +8,7 @@ import Image from "@/components/ui_palette/Image";
 import useBookStore from "@/hooks/useBookStore";
 
 import { BookType } from "@/types";
+import useDialogBookStore from "@/hooks/useDialogBookStore";
 
 type MarqueeBookCardProps = {
   book: BookType;
@@ -17,6 +18,8 @@ const widthClass = cx("w-[125px] sm:w-[150px] md:w-[200px]", "shrink-0");
 
 const MarqueeBookCard = ({ book }: MarqueeBookCardProps) => {
   const { matchedBook, toggleBookmark } = useBookStore(book);
+  const { toggleDialogBook } = useDialogBookStore(book);
+
   return (
     <div className={cx("text-4xl", "mx-4 flex", "min-w-0")}>
       <div className={cx(widthClass, "relative")}>
@@ -79,6 +82,7 @@ const MarqueeBookCard = ({ book }: MarqueeBookCardProps) => {
             id={`marquee-book-${book.id}-btn`}
             data-identity={`marquee-book-${book.id}-btn`}
             aria-label={`${book.title}'s View Detail Button`}
+            onClick={toggleDialogBook}
           >
             View Detail
           </Button>

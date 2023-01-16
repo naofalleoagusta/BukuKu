@@ -1,5 +1,7 @@
 import { Outlet } from "react-router-dom";
 
+import DialogBook from "../DialogBook";
+
 import Navbar from "../Navbar";
 
 const Layout = () => {
@@ -9,6 +11,7 @@ const Layout = () => {
       <main>
         <Outlet />
       </main>
+      <DialogBook />
     </>
   );
 };

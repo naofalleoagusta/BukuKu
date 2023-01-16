@@ -11,6 +11,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@types/react-lazy-load-image-component": "^1.5.2",

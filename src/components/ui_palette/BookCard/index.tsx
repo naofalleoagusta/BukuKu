@@ -6,6 +6,7 @@ import Button from "../Button";
 import Image from "../Image";
 
 import useBookStore from "@/hooks/useBookStore";
+import useDialogBookStore from "@/hooks/useDialogBookStore";
 
 import { BookType } from "@/types";
 
@@ -16,6 +17,12 @@ type BookCardProps = {
 
 const BookCard = ({ className, book }: BookCardProps) => {
   const { matchedBook, toggleBookmark } = useBookStore(book);
+  const { toggleDialogBook } = useDialogBookStore(book);
+
+  const handleClickFavorite = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    toggleBookmark();
+  };
 
   return (
     <div
@@ -26,6 +33,7 @@ const BookCard = ({ className, book }: BookCardProps) => {
         "hover:bg-blue-200 hover:shadow-lg",
         "transition-all"
       )}
+      onClick={toggleDialogBook}
     >
       <Button
         size="small"
@@ -33,7 +41,7 @@ const BookCard = ({ className, book }: BookCardProps) => {
           "absolute z-[2] flex rounded-full",
           "top-[14px] right-[14px] md:top-[18px] md:right-[18px]"
         )}
-        onClick={toggleBookmark}
+        onClick={handleClickFavorite}
       >
         {matchedBook ? (
           <FilledStarIcon className={cx("h-5 w-5", "md:w-6 md:h-6", "text-yellow-300")} />
