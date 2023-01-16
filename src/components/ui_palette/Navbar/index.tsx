@@ -1,6 +1,8 @@
+import { BookOpenIcon } from "@heroicons/react/24/outline";
 import { cx } from "class-variance-authority";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Button from "../Button";
 
 export const logo = cx([
   "text-transparent",
@@ -29,7 +31,7 @@ const Navbar = () => {
         "w-full h-[70px]",
         "py-4",
         "transition-colors",
-        scrolled ? "bg-white shadow-sm" : "bg-gray-900",
+        scrolled ? "bg-white shadow-md" : "bg-gray-900",
       ])}
     >
       <nav
@@ -46,6 +48,13 @@ const Navbar = () => {
       >
         <Link to="/" className={cx([logo, "text-xl"])}>
           BukuKu
+        </Link>
+        <Link to="/bookmark">
+          <Button size="small" intent="secondary" className="group">
+            <BookOpenIcon
+              className={cx("h-6 w-6", scrolled ? "" : "text-white group-hover:text-gray-800")}
+            />
+          </Button>
         </Link>
       </nav>
     </header>

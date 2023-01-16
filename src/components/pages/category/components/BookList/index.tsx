@@ -15,6 +15,7 @@ import addFetchedBooks from "../../helpers/addFetchedBooks";
 
 import { PageInfoType } from "../../types";
 import { BookType } from "@/types";
+import filterBooks from "../../helpers/filterBooks";
 
 type BookListProps = {
   pageInfo: PageInfoType;
@@ -33,11 +34,7 @@ const BookList = ({ pageInfo, handleChangePage }: BookListProps) => {
 
   const filteredBooks = useMemo(() => {
     const query = pageInfo.query.toLowerCase();
-    return fetchedBooks.filter(
-      (book) =>
-        book.title.toLocaleLowerCase().includes(query) ||
-        book.authors.some((author) => author.toLowerCase().includes(query))
-    );
+    return filterBooks(fetchedBooks, query);
   }, [fetchedBooks, pageInfo.query]);
 
   useEffect(() => {

@@ -2,9 +2,10 @@ import { cx } from "class-variance-authority";
 
 import Section from "@/components/ui_palette/Section";
 import MarqueeBookList from "./components/MarqueeBookList";
+import CategoriesList from "./components/CategoriesList";
+import BookmarkList from "./components/BookmarkList";
 
 import { logo } from "@/components/ui_palette/Navbar";
-import CategoriesList from "./components/CategoriesList";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
         </h1>
       </Section>
       <MarqueeBookList />
+      <BookmarkList />
       <CategoriesList />
     </>
   );
