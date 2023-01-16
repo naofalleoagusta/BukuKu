@@ -9,13 +9,14 @@ import { memo, useEffect, useMemo, useState } from "react";
 import BookCard from "@/components/ui_palette/BookCard";
 import Button from "@/components/ui_palette/Button";
 import Section from "@/components/ui_palette/Section";
+import Skeleton from "@/components/ui_palette/Skeleton";
 
 import useFetchBooks from "@/hooks/useFechBooks";
 import addFetchedBooks from "../../helpers/addFetchedBooks";
+import filterBooks from "../../helpers/filterBooks";
 
 import { PageInfoType } from "../../types";
 import { BookType } from "@/types";
-import filterBooks from "../../helpers/filterBooks";
 
 type BookListProps = {
   pageInfo: PageInfoType;
@@ -48,7 +49,25 @@ const BookList = ({ pageInfo, handleChangePage }: BookListProps) => {
   }
 
   if (!books) {
-    return <div>loading</div>;
+    return (
+      <Section className={cx("overflow-hidden", "translate-y-[-50px]")}>
+        <div className={cx("grid", "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5")}>
+          {[...Array(10)].map((_, idx) => (
+            <div className="p-4" key={idx}>
+              <Skeleton className={cx("w-full", "h-[250px]", "mb-2")} />
+              <Skeleton className={cx("w-full", "h-[24px]", "mb-2")} />
+              <Skeleton className={cx("w-[50%]", "h-[20px]")} />
+            </div>
+          ))}
+        </div>
+
+        <div className={cx("flex gap-3", "items-center", "justify-end", "my-4")}>
+          {[...Array(3)].map((_, idx) => (
+            <Skeleton className="w-10 h-10" key={idx} />
+          ))}
+        </div>
+      </Section>
+    );
   }
 
   return (

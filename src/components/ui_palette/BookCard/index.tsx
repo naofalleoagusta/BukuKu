@@ -1,11 +1,13 @@
-import useBookStore from "@/hooks/useBookStore";
-import { BookType } from "@/types";
 import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
 import { cx } from "class-variance-authority";
-import Button from "../Button";
 
+import Button from "../Button";
 import Image from "../Image";
+
+import useBookStore from "@/hooks/useBookStore";
+
+import { BookType } from "@/types";
 
 type BookCardProps = {
   book: BookType;

@@ -13,10 +13,14 @@ const BookList = ({ title, categoryId }: BookListProps) => {
   if (error) {
     return <div>something wrong</div>;
   }
-  if (!books) {
-    return <div>loading</div>;
-  }
-  return <BookSection books={books} pathname={`category/${categoryId}`} title={title} />;
+  return (
+    <BookSection
+      books={books || []}
+      pathname={`category/${categoryId}`}
+      loading={!books}
+      title={title}
+    />
+  );
 };
 
 export default BookList;

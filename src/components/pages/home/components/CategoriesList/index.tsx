@@ -6,6 +6,8 @@ import Section from "@/components/ui_palette/Section";
 import BookList from "../BookList";
 
 import useFetchCategories from "@/hooks/useFetchCategories";
+import BookSection from "../BookSection";
+import Skeleton from "@/components/ui_palette/Skeleton";
 
 const categoryCardClasses = [
   "from-cyan-500 to-blue-500",
@@ -19,7 +21,22 @@ const CategoriesList = () => {
     return <div>Something is wrong</div>;
   }
   if (!categories) {
-    return <div>loading</div>;
+    return (
+      <>
+        <BookSection books={[]} loading />
+        <BookSection books={[]} loading />
+        <Section>
+          <Skeleton className={cx("h-[28px] sm:h-[36px]", "w-full")} />
+          <div
+            className={cx("grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4", "mt-6 md:mt-8 mb-4")}
+          >
+            {[...Array(3)].map((_, idx) => (
+              <Skeleton key={idx} className={cx("p-4", "w-full", "h-[88px]")} />
+            ))}
+          </div>
+        </Section>
+      </>
+    );
   }
   return categories.length ? (
     <>

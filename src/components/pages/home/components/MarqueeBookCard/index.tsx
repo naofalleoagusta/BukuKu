@@ -1,7 +1,13 @@
+import { cx } from "class-variance-authority";
+import { StarIcon } from "@heroicons/react/24/outline";
+import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
+
 import Button from "@/components/ui_palette/Button";
 import Image from "@/components/ui_palette/Image";
+
+import useBookStore from "@/hooks/useBookStore";
+
 import { BookType } from "@/types";
-import { cx } from "class-variance-authority";
 
 type MarqueeBookCardProps = {
   book: BookType;
@@ -10,15 +16,30 @@ type MarqueeBookCardProps = {
 const widthClass = cx("w-[125px] sm:w-[150px] md:w-[200px]", "shrink-0");
 
 const MarqueeBookCard = ({ book }: MarqueeBookCardProps) => {
+  const { matchedBook, toggleBookmark } = useBookStore(book);
   return (
     <div className={cx("text-4xl", "mx-4 flex", "min-w-0")}>
-      <div className={widthClass}>
+      <div className={cx(widthClass, "relative")}>
         <Image
           src={book.cover_url}
           alt={`${book.title}'s Cover`}
           lazy={false}
           className={cx("object-cover", "w-full h-auto", "shadow-lg")}
         />
+        <Button
+          size="small"
+          className={cx(
+            "absolute z-[2] flex rounded-full",
+            "top-[6px] left-[6px] md:top-[10px] md:left-[10px]"
+          )}
+          onClick={toggleBookmark}
+        >
+          {matchedBook ? (
+            <FilledStarIcon className={cx("h-5 w-5", "md:w-6 md:h-6", "text-yellow-300")} />
+          ) : (
+            <StarIcon className={cx("h-5 w-5", "md:w-6 md:h-6")} />
+          )}
+        </Button>
       </div>
       <div className={cx("py-4 md:py-5 md:pr-4", widthClass)}>
         <div

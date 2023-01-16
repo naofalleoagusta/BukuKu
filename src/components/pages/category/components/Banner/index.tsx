@@ -22,19 +22,13 @@ const Banner = ({ query, handleChangeQuery }: BannerProps) => {
 
   useTitle(`${category?.name || "Category"}`);
 
-  if (error) {
-    return <div>Something is wrong</div>;
-  }
-
-  if (!categories) {
-    return <div>loading</div>;
-  }
-
   return (
     <SearchBanner
       title={category ? category.name : "Category Not Found"}
       query={query}
       handleChangeQuery={handleChangeQuery}
+      loading={!categories}
+      error={error}
     />
   );
 };

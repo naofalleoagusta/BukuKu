@@ -4,25 +4,52 @@ import { Link } from "react-router-dom";
 import Section from "@/components/ui_palette/Section";
 import Button from "@/components/ui_palette/Button";
 import BookCard from "@/components/ui_palette/BookCard";
+import Skeleton from "@/components/ui_palette/Skeleton";
 
 import { BookType } from "@/types";
 
 type BookSectionProps = {
-  title: string;
+  title?: string;
   books: BookType[];
-  pathname: string;
+  pathname?: string;
   threshold?: number;
   emptyPlaceholder?: string;
+  loading?: boolean;
 };
 
 const BookSection = ({
-  title,
+  title = "",
   books,
-  pathname,
+  pathname = "",
   threshold,
   emptyPlaceholder = "No Record Found",
+  loading,
 }: BookSectionProps) => {
   const hasMoreBooks = (books.length || 0) > 5;
+
+  if (loading) {
+    return (
+      <Section className="overflow-hidden" wrapperClassName={cx("pr-0")}>
+        <Skeleton className={cx("w-[50%] h-10")} />
+        <div
+          className={cx(
+            "flex lg:grid lg:grid-cols-5",
+            "overflow-x-auto lg:overflow-x-hidden",
+            "mt-6 md:mt-10",
+            "pb-4"
+          )}
+        >
+          {[...Array(5)].map((_, idx) => (
+            <div className="p-4" key={idx}>
+              <Skeleton className={cx("w-full", "h-[250px]", "mb-2")} />
+              <Skeleton className={cx("w-full", "h-[24px]", "mb-2")} />
+              <Skeleton className={cx("w-[50%]", "h-[20px]")} />
+            </div>
+          ))}
+        </div>
+      </Section>
+    );
+  }
   return (
     <Section className="overflow-hidden" wrapperClassName={cx("pr-0")}>
       <div className={cx("py-[30px]", "relative")}>

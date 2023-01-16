@@ -8,6 +8,7 @@ import {
 
 import Button from "../Button";
 import Section from "../Section";
+import Skeleton from "../Skeleton";
 
 const iconStyle = cx(
   "text-white group-hover:text-gray-700",
@@ -20,9 +21,11 @@ type SearchBannerProps = {
   title: string;
   query: string;
   handleChangeQuery: (param: string) => void;
+  loading?: boolean;
+  error?: unknown;
 };
 
-const SearchBanner = ({ title, query, handleChangeQuery }: SearchBannerProps) => {
+const SearchBanner = ({ title, query, handleChangeQuery, loading, error }: SearchBannerProps) => {
   const inputEl = useRef<HTMLInputElement>(null);
   const [showInput, setShowInput] = useState(false);
   const [isTransition, setIsTransition] = useState(false);
@@ -50,6 +53,22 @@ const SearchBanner = ({ title, query, handleChangeQuery }: SearchBannerProps) =>
       setShowInput(true);
     }
   }, []);
+
+  if (error) {
+    return (
+      <Section isBanner>
+        <h1>Something is wrong...</h1>
+      </Section>
+    );
+  }
+
+  if (loading) {
+    return (
+      <Section isBanner>
+        <Skeleton className={cx("h-[40px] w-[75%]")} />
+      </Section>
+    );
+  }
 
   return (
     <Section isBanner>
