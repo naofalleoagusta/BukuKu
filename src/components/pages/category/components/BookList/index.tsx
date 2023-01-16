@@ -53,7 +53,7 @@ const BookList = ({ pageInfo, handleChangePage }: BookListProps) => {
       <Section className={cx("overflow-hidden", "translate-y-[-50px]")}>
         <div className={cx("grid", "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5")}>
           {[...Array(10)].map((_, idx) => (
-            <div className="p-4" key={idx}>
+            <div className="p-2" key={idx}>
               <Skeleton className={cx("w-full", "h-[250px]", "mb-2")} />
               <Skeleton className={cx("w-full", "h-[24px]", "mb-2")} />
               <Skeleton className={cx("w-[50%]", "h-[20px]")} />

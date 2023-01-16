@@ -1,7 +1,10 @@
 import { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { cx } from "class-variance-authority";
 
 import Layout from "../Layout";
+import Section from "../Section";
+import Skeleton from "../Skeleton";
 
 import routers from "@/router";
 
@@ -16,7 +19,13 @@ const RouterProvider = () => {
               <Route
                 key={`route-${idx}`}
                 element={
-                  <Suspense fallback={<></>}>
+                  <Suspense
+                    fallback={
+                      <Section isBanner>
+                        <Skeleton className={cx("h-[40px] w-[75%]")} />
+                      </Section>
+                    }
+                  >
                     <Component />
                   </Suspense>
                 }
