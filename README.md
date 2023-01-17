@@ -53,3 +53,7 @@ This would help the the FE to create a pagination that able to show more availab
 - I'm facing a `CORS` issue on this API. Everytime I'm trying to hit the API on `localhost`, I got CORS issue. I have to deploy my own CORS Proxy to resolve this issue and wrap the API endpoint with my CORS Proxy. However it works fine, when I tried to hit the API on Postman. Perhaps before making it public, make sure the API works on other origin 😀.
 
 While there is few things to improve, I have to admit the API quite fast (before I'm wrapping it with CORS Proxy), kudos to the developer 👏🏽. (Although maybe I'm the only who uses the API currently).
+
+## Deployment
+
+I have deployed this app on [Vercel](https://vercel.com), you can access it on the web through https://bukuku.naofalleoagusta.xyz/
