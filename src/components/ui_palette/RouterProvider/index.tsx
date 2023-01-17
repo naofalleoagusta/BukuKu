@@ -8,6 +8,7 @@ import Skeleton from "../Skeleton";
 import ScrollToTop from "../ScrollToTop";
 
 import routers from "@/router";
+import Page404 from "@/components/pages/404";
 
 const RouterProvider = () => {
   return (
@@ -23,9 +24,19 @@ const RouterProvider = () => {
                 element={
                   <Suspense
                     fallback={
-                      <Section isBanner>
-                        <Skeleton className={cx("h-[40px] w-[75%]")} />
-                      </Section>
+                      <>
+                        <Section isBanner>
+                          <Skeleton className={cx("h-[40px] w-[75%]")} />
+                        </Section>
+                        <Section>
+                          {[...Array(2)].map((_, idx) => (
+                            <div key={`skeleton-${idx}`} className="mb-2">
+                              <Skeleton className={cx("h-[40px] w-[75%]", "mb-4")} />
+                              <Skeleton className={cx("h-[200px] w-full")} />
+                            </div>
+                          ))}
+                        </Section>
+                      </>
                     }
                   >
                     <Component />
@@ -36,6 +47,8 @@ const RouterProvider = () => {
               />
             );
           })}
+
+          <Route path="*" element={<Page404 />} />
         </Route>
       </Routes>
     </BrowserRouter>
